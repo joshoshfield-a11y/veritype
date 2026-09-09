@@ -8,9 +8,14 @@
     <color name="veritype_on_primary">#FFFFFF</color>
 
     <!-- Keyboard chrome -->
-    <color name="keyboard_background">#263238</color>
-    <color name="key_background">#37474F</color>
-    <color name="key_border">#263238</color>
+    <color name="keyboard_background">#1B232B</color>
+    <!-- keycap face (bottom of gradient) and lit top -->
+    <color name="key_background">#3A4753</color>
+    <color name="key_face_light">#51616F</color>
+    <!-- pressed state: teal accent fill -->
+    <color name="key_background_pressed">#0E5E56</color>
+    <color name="key_border_pressed">#00897B</color>
+    <color name="key_border">#141B21</color>
     <color name="key_text">#ECEFF1</color>
     <color name="key_preview_background">#1565C0</color>
     <color name="key_preview_text">#FFFFFF</color>

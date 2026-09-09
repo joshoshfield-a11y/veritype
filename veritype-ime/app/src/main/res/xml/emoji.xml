@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Emoji layout. Every emoji key uses android:keyOutputText, which routes
+    through OnKeyboardActionListener.onText() in VeriTypeIMEService.
+    VeriType custom code: -103 = back to QWERTY.
+-->
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="12.5%p"
+    android:horizontalGap="3dp"
+    android:verticalGap="5dp"
+    android:keyHeight="52dp">
+
+    <Row>
+        <Key android:keyOutputText="😀" android:keyLabel="😀" android:keyEdgeFlags="left" />
+        <Key android:keyOutputText="😃" android:keyLabel="😃" />
+        <Key android:keyOutputText="😄" android:keyLabel="😄" />
+        <Key android:keyOutputText="😁" android:keyLabel="😁" />
+        <Key android:keyOutputText="😆" android:keyLabel="😆" />
+        <Key android:keyOutputText="😅" android:keyLabel="😅" />
+        <Key android:keyOutputText="😂" android:keyLabel="😂" />
+        <Key android:keyOutputText="🤣" android:keyLabel="🤣" android:keyEdgeFlags="right" />
+    </Row>
+
+    <Row>
+        <Key android:keyOutputText="😊" android:keyLabel="😊" android:keyEdgeFlags="left" />
+        <Key android:keyOutputText="😇" android:keyLabel="😇" />
+        <Key android:keyOutputText="🙂" android:keyLabel="🙂" />
+        <Key android:keyOutputText="😉" android:keyLabel="😉" />
+        <Key android:keyOutputText="😍" android:keyLabel="😍" />
+        <Key android:keyOutputText="😘" android:keyLabel="😘" />
+        <Key android:keyOutputText="😜" android:keyLabel="😜" />
+        <Key android:keyOutputText="🤔" android:keyLabel="🤔" android:keyEdgeFlags="right" />
+    </Row>
+
+    <Row>
+        <Key android:keyOutputText="🔥" android:keyLabel="🔥" android:keyEdgeFlags="left" />
+        <Key android:keyOutputText="✨" android:keyLabel="✨" />
+        <Key android:keyOutputText="🌙" android:keyLabel="🌙" />
+        <Key android:keyOutputText="⭐" android:keyLabel="⭐" />
+        <Key android:keyOutputText="⚡" android:keyLabel="⚡" />
+        <Key android:keyOutputText="🌈" android:keyLabel="🌈" />
+        <Key android:keyOutputText="🌊" android:keyLabel="🌊" />
+        <Key android:keyOutputText="☀️" android:keyLabel="☀️" android:keyEdgeFlags="right" />
+    </Row>
+
+    <Row>
+        <Key android:keyOutputText="🎵" android:keyLabel="🎵" android:keyEdgeFlags="left" />
+        <Key android:keyOutputText="🎉" android:keyLabel="🎉" />
+        <Key android:keyOutputText="🎊" android:keyLabel="🎊" />
+        <Key android:keyOutputText="🚀" android:keyLabel="🚀" />
+        <Key android:keyOutputText="💡" android:keyLabel="💡" />
+        <Key android:keyOutputText="✅" android:keyLabel="✅" />
+        <Key android:keyOutputText="❤️" android:keyLabel="❤️" />
+        <Key android:keyOutputText="💯" android:keyLabel="💯" android:keyEdgeFlags="right" />
+    </Row>
+
+    <Row>
+        <Key android:keyOutputText="🍕" android:keyLabel="🍕" android:keyEdgeFlags="left" />
+        <Key android:keyOutputText="☕" android:keyLabel="☕" />
+        <Key android:keyOutputText="🌮" android:keyLabel="🌮" />
+        <Key android:keyOutputText="🍔" android:keyLabel="🍔" />
+        <Key android:keyOutputText="🎮" android:keyLabel="🎮" />
+        <Key android:keyOutputText="👍" android:keyLabel="👍" />
+        <Key android:keyOutputText="👎" android:keyLabel="👎" />
+        <Key android:keyOutputText="🙏" android:keyLabel="🙏" android:keyEdgeFlags="right" />
+    </Row>
+
+    <!-- Bottom row: back to ABC, space, delete, return -->
+    <Row>
+        <Key android:codes="-103" android:keyLabel="ABC" android:keyWidth="15%p" android:keyEdgeFlags="left" />
+        <Key android:codes="32" android:keyLabel="space" android:keyWidth="55%p" />
+        <Key android:codes="-5" android:keyLabel="⌫" android:keyWidth="15%p" android:isRepeatable="true" />
+        <Key android:codes="-4" android:keyLabel="↵" android:keyWidth="15%p" android:keyEdgeFlags="right" />
+    </Row>
+
+</Keyboard>

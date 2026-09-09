@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Symbols/digits layout. -2 (KEYCODE_MODE_CHANGE) switches back to QWERTY. -->
+<!--
+    Symbols/digits layout.
+      -2 = KEYCODE_MODE_CHANGE -> back to QWERTY
+    VeriType custom code: -101 = paste from clipboard.
+-->
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:keyWidth="10%p"
-    android:horizontalGap="0px"
-    android:verticalGap="0px"
-    android:keyHeight="56dp">
+    android:horizontalGap="3dp"
+    android:verticalGap="5dp"
+    android:keyHeight="52dp">
 
     <!-- Row 1: digits -->
     <Row>
@@ -34,26 +38,28 @@
         <Key android:codes="41" android:keyLabel=")" android:keyEdgeFlags="right" />
     </Row>
 
-    <!-- Row 3: ABC switch, punctuation, delete -->
+    <!-- Row 3: punctuation -->
     <Row>
-        <Key android:codes="-2" android:keyLabel="ABC" android:keyWidth="15%p" android:keyEdgeFlags="left" />
-        <Key android:codes="33" android:keyLabel="!" />
+        <Key android:codes="33" android:keyLabel="!" android:keyEdgeFlags="left" />
         <Key android:codes="34" android:keyLabel="&quot;" />
         <Key android:codes="39" android:keyLabel="'" />
         <Key android:codes="58" android:keyLabel=":" />
         <Key android:codes="59" android:keyLabel=";" />
         <Key android:codes="63" android:keyLabel="?" />
         <Key android:codes="47" android:keyLabel="/" />
-        <Key android:codes="-5" android:keyLabel="⌫" android:keyWidth="15%p" android:isRepeatable="true" android:keyEdgeFlags="right" />
+        <Key android:codes="95" android:keyLabel="_" />
+        <Key android:codes="61" android:keyLabel="=" />
+        <Key android:codes="92" android:keyLabel="\" android:keyEdgeFlags="right" />
     </Row>
 
-    <!-- Row 4: ABC, comma, space, period, return -->
+    <!-- Row 4: ABC, clipboard, comma, space, period, return -->
     <Row>
         <Key android:codes="-2" android:keyLabel="ABC" android:keyWidth="15%p" android:keyEdgeFlags="left" />
-        <Key android:codes="44" android:keyLabel="," />
-        <Key android:codes="32" android:keyLabel="space" android:keyWidth="40%p" />
-        <Key android:codes="46" android:keyLabel="." />
-        <Key android:codes="-4" android:keyLabel="↵" android:keyWidth="25%p" android:keyEdgeFlags="right" />
+        <Key android:codes="-101" android:keyLabel="📋" android:keyWidth="13%p" />
+        <Key android:codes="44" android:keyLabel="," android:keyWidth="10%p" />
+        <Key android:codes="32" android:keyLabel="space" android:keyWidth="36%p" />
+        <Key android:codes="46" android:keyLabel="." android:keyWidth="10%p" />
+        <Key android:codes="-4" android:keyLabel="↵" android:keyWidth="16%p" android:keyEdgeFlags="right" />
     </Row>
 
 </Keyboard>

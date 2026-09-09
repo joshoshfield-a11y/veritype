@@ -6,12 +6,15 @@
       -2 = mode change (KEYCODE_MODE_CHANGE) -> switches to the symbols layout
       -4 = enter/done (KEYCODE_DONE)
       -5 = delete/backspace (KEYCODE_DELETE)
+    VeriType custom codes (handled in VeriTypeIMEService.onKey):
+     -101 = paste from clipboard
+     -102 = switch to emoji layout
 -->
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
     android:keyWidth="10%p"
-    android:horizontalGap="0px"
-    android:verticalGap="0px"
-    android:keyHeight="56dp">
+    android:horizontalGap="3dp"
+    android:verticalGap="5dp"
+    android:keyHeight="52dp">
 
     <!-- Row 1: qwertyuiop -->
     <Row>
@@ -53,13 +56,15 @@
         <Key android:codes="-5" android:keyLabel="⌫" android:keyWidth="15%p" android:isRepeatable="true" android:keyEdgeFlags="right" />
     </Row>
 
-    <!-- Row 4: symbols, comma, space, period, return -->
+    <!-- Row 4: clipboard, symbols, emoji, comma, space, period, return -->
     <Row>
-        <Key android:codes="-2" android:keyLabel="\?123" android:keyWidth="15%p" android:keyEdgeFlags="left" />
-        <Key android:codes="44" android:keyLabel="," />
-        <Key android:codes="32" android:keyLabel="space" android:keyWidth="40%p" />
-        <Key android:codes="46" android:keyLabel="." />
-        <Key android:codes="-4" android:keyLabel="↵" android:keyWidth="25%p" android:keyEdgeFlags="right" />
+        <Key android:codes="-101" android:keyLabel="📋" android:keyWidth="12%p" android:keyEdgeFlags="left" />
+        <Key android:codes="-2" android:keyLabel="\?123" android:keyWidth="13%p" />
+        <Key android:codes="-102" android:keyLabel="😀" android:keyWidth="12%p" />
+        <Key android:codes="44" android:keyLabel="," android:keyWidth="10%p" />
+        <Key android:codes="32" android:keyLabel="space" android:keyWidth="30%p" />
+        <Key android:codes="46" android:keyLabel="." android:keyWidth="10%p" />
+        <Key android:codes="-4" android:keyLabel="↵" android:keyWidth="13%p" android:keyEdgeFlags="right" />
     </Row>
 
 </Keyboard>

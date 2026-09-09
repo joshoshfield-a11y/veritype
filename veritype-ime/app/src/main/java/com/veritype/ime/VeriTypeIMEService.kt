@@ -1,5 +1,7 @@
 package com.veritype.ime
 
+import android.content.ClipboardManager
+import android.content.Context
 import android.inputmethodservice.InputMethodService
 import android.inputmethodservice.Keyboard
 import android.inputmethodservice.KeyboardView
@@ -45,8 +47,10 @@ class VeriTypeIMEService : InputMethodService(), KeyboardView.OnKeyboardActionLi
     private lateinit var keyboardView: KeyboardView
     private lateinit var qwertyKeyboard: Keyboard
     private lateinit var symbolsKeyboard: Keyboard
+    private lateinit var emojiKeyboard: Keyboard
 
-    private var showingSymbols = false
+    /** Active layout id: one of [LAYOUT_QWERTY], [LAYOUT_SYMBOLS], [LAYOUT_EMOJI]. */
+    private var activeLayout = LAYOUT_QWERTY
     private var isShifted = false
 
     private lateinit var repository: LogRepository
@@ -70,6 +74,7 @@ class VeriTypeIMEService : InputMethodService(), KeyboardView.OnKeyboardActionLi
         repository = LogRepository(AppDatabase.getInstance(this).logDao())
         qwertyKeyboard = Keyboard(this, R.xml.qwerty)
         symbolsKeyboard = Keyboard(this, R.xml.symbols)
+        emojiKeyboard = Keyboard(this, R.xml.emoji)
     }
 
     override fun onCreateInputView(): View {
@@ -117,6 +122,13 @@ class VeriTypeIMEService : InputMethodService(), KeyboardView.OnKeyboardActionLi
             }
 
             Keyboard.KEYCODE_MODE_CHANGE -> switchLayout()
+
+            // VeriType custom keycodes (see res/xml/*.xml header comments).
+            KEYCODE_CLIPBOARD -> pasteFromClipboard()
+
+            KEYCODE_EMOJI -> showLayout(LAYOUT_EMOJI)
+
+            KEYCODE_BACK_TO_QWERTY -> showLayout(LAYOUT_QWERTY)
 
             Keyboard.KEYCODE_SHIFT -> {
                 isShifted = !isShifted
@@ -174,6 +186,9 @@ class VeriTypeIMEService : InputMethodService(), KeyboardView.OnKeyboardActionLi
      */
     override fun onText(text: CharSequence?) {
         if (!text.isNullOrEmpty()) {
+            // Keys with android:keyOutputText (the emoji layout) deliver here;
+            // commit to the field ourselves and log uniformly.
+            currentInputConnection?.commitText(text, 1)
             sessionBuffer.append(text)
         }
     }
@@ -195,10 +210,38 @@ class VeriTypeIMEService : InputMethodService(), KeyboardView.OnKeyboardActionLi
     // ------------------------------------------------------------------
 
     private fun switchLayout() {
-        showingSymbols = !showingSymbols
-        keyboardView.keyboard = if (showingSymbols) symbolsKeyboard else qwertyKeyboard
+        showLayout(if (activeLayout == LAYOUT_QWERTY) LAYOUT_SYMBOLS else LAYOUT_QWERTY)
+    }
+
+    private fun showLayout(layout: Int) {
+        activeLayout = layout
+        keyboardView.keyboard = when (layout) {
+            LAYOUT_SYMBOLS -> symbolsKeyboard
+            LAYOUT_EMOJI -> emojiKeyboard
+            else -> qwertyKeyboard
+        }
         isShifted = false
         qwertyKeyboard.isShifted = false
+        keyboardView.invalidateAllKeys()
+    }
+
+    /**
+     * Paste the system clipboard's primary clip at the cursor. The pasted
+     * content is logged like any other typed-through-keyboard text, prefixed
+     * with a [CLIP] marker so it is distinguishable in the log viewer.
+     */
+    private fun pasteFromClipboard() {
+        val ic = currentInputConnection ?: return
+        val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = cm.primaryClip
+        if (clip != null && clip.itemCount > 0) {
+            val text = clip.getItemAt(0).coerceToText(this)?.toString()
+            if (!text.isNullOrEmpty()) {
+                ic.commitText(text, 1)
+                sessionBuffer.append(CLIP_MARKER).append(text)
+                if (sessionBuffer.length >= FLUSH_THRESHOLD) flushBuffer()
+            }
+        }
     }
 
     /**
@@ -245,6 +288,17 @@ class VeriTypeIMEService : InputMethodService(), KeyboardView.OnKeyboardActionLi
     companion object {
         private const val DEL_MARKER = "[DEL]"
         private const val ENTER_MARKER = "[ENTER]\n"
+        private const val CLIP_MARKER = "[CLIP] "
         private const val FLUSH_THRESHOLD = 200
+
+        /** VeriType custom keycodes. */
+        private const val KEYCODE_CLIPBOARD = -101
+        private const val KEYCODE_EMOJI = -102
+        private const val KEYCODE_BACK_TO_QWERTY = -103
+
+        /** Layout ids for [activeLayout]. */
+        private const val LAYOUT_QWERTY = 0
+        private const val LAYOUT_SYMBOLS = 1
+        private const val LAYOUT_EMOJI = 2
     }
 }

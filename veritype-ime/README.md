@@ -6,6 +6,21 @@ your active keyboard, and every character you type **through it** is logged
 locally on the device. A viewer app (the launcher activity) shows the log and
 lets you export or delete it.
 
+
+## Keyboard features (v1.1)
+
+- **Styled keycaps** — top-lit gradient keycaps with rounded corners, 3dp row
+  gaps, and a teal press-state that lights a key while your finger is down
+  (state-list drawable: `res/drawable/key_background.xml`).
+- **📋 Clipboard key** — a dedicated clipboard key on both the QWERTY and
+  symbols layouts pastes the system clipboard's primary clip at the cursor.
+  Pasted content is logged like typed text, prefixed with `[CLIP] ` so it is
+  distinguishable in the log viewer.
+- **😀 Emoji layout** — an 😀 key on the bottom row opens a 5-row emoji layout
+  (smileys, gestures, nature, objects, food/activities); `ABC` returns to
+  QWERTY. Emoji keys use `android:keyOutputText`, which the service commits
+  and logs through `onText()`.
+
 ## What VeriType deliberately does NOT do
 
 - **No network.** The app does not declare `android.permission.INTERNET`.
@@ -40,7 +55,7 @@ Each log entry (Room entity `LogEntry`, table `log_entries`) contains:
 | `appPackage`     | Package of the app holding the focused field (from EditorInfo) |
 | `fieldHint`      | The field's hint text, if the target app declared one          |
 | `inputTypeClass` | Coarse input-type class label only                             |
-| `text`           | The typed segment. `[DEL]` = backspace, `[ENTER]` = return     |
+| `text`           | The typed segment. `[DEL]` = backspace, `[ENTER]` = return, `[CLIP]` = clipboard paste     |
 
 Segments are buffered in memory and flushed to the database on field
 transitions, on Enter, when the keyboard is dismissed, and every 200

@@ -12,6 +12,7 @@
     android:background="@color/keyboard_background"
     android:keyBackground="@drawable/key_background"
     android:keyTextColor="@color/key_text"
-    android:keyTextSize="18sp"
+    android:keyTextSize="20sp"
+    android:labelTextSize="14sp"
     android:keyPreviewLayout="@layout/key_preview"
     android:shadowRadius="0.0" />
