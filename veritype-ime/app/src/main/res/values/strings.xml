@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VeriType</string>
+    <string name="subtype_name">VeriType (English, US)</string>
+
+    <string name="viewer_subtitle">Everything you type through the VeriType keyboard is logged on this device only. Newest entries first.</string>
+
+    <string name="open_ime_settings">Enable keyboard</string>
+    <string name="switch_keyboard">Switch keyboard</string>
+    <string name="export_txt">Export TXT</string>
+    <string name="export_json">Export JSON</string>
+    <string name="clear_all">Clear All</string>
+
+    <string name="clear_all_title">Delete the entire log?</string>
+    <string name="clear_all_message">This permanently deletes every logged entry stored on this device. This cannot be undone.</string>
+    <string name="clear_all_confirm">Delete</string>
+
+    <string name="export_success">Exported %1$d entries.</string>
+    <string name="export_failed">Export failed.</string>
+
+    <string name="log_meta_format">app: %1$s • type: %2$s • field: %3$s</string>
+
+    <string name="first_run_title">Enable VeriType</string>
+    <string name="first_run_message">To use VeriType:\n\n1. Tap "Enable keyboard" (or open Settings → General management → Keyboard list and default on your Samsung phone).\n2. Turn on VeriType. Android will show the standard warning it displays for every third-party keyboard.\n3. Tap "Switch keyboard" and pick VeriType as the active input method.\n\nEverything you type through VeriType is then logged locally on this device. Nothing is ever sent anywhere — the app has no internet permission.</string>
+</resources>

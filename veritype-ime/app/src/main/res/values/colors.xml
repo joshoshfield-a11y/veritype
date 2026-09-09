@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="veritype_primary">#1565C0</color>
+    <color name="veritype_primary_dark">#0D47A1</color>
+    <color name="veritype_secondary">#00897B</color>
+    <color name="veritype_background">#FAFAFA</color>
+    <color name="veritype_surface">#FFFFFF</color>
+    <color name="veritype_on_primary">#FFFFFF</color>
+
+    <!-- Keyboard chrome -->
+    <color name="keyboard_background">#263238</color>
+    <color name="key_background">#37474F</color>
+    <color name="key_border">#263238</color>
+    <color name="key_text">#ECEFF1</color>
+    <color name="key_preview_background">#1565C0</color>
+    <color name="key_preview_text">#FFFFFF</color>
+
+    <!-- Log list -->
+    <color name="log_divider">#E0E0E0</color>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.VeriType" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/veritype_primary</item>
+        <item name="colorPrimaryVariant">@color/veritype_primary_dark</item>
+        <item name="colorSecondary">@color/veritype_secondary</item>
+        <item name="colorOnPrimary">@color/veritype_on_primary</item>
+        <item name="android:colorBackground">@color/veritype_background</item>
+        <item name="colorSurface">@color/veritype_surface</item>
+        <item name="android:statusBarColor">@color/veritype_primary_dark</item>
+    </style>
+</resources>

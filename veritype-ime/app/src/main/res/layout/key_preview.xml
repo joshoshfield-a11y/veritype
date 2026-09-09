@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Popup shown above a key while it is pressed. -->
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="40dp"
+    android:minHeight="44dp"
+    android:gravity="center"
+    android:background="@color/key_preview_background"
+    android:textColor="@color/key_preview_text"
+    android:textSize="22sp"
+    android:textStyle="bold" />

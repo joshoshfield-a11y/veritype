@@ -1,0 +1,19 @@
+# Build outputs
+**/build/
+*.apk
+*.ap_
+*.dex
+
+# Gradle
+.gradle/
+local.properties
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+
+# Carver test artifacts
+filecarver/*.bin

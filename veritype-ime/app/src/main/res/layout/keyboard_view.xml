@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Legacy android.inputmethodservice.KeyboardView — deprecated since API 29 but
+    still fully functional, and by far the simplest self-contained way to render
+    an IME keyboard without a custom View.
+-->
+<android.inputmethodservice.KeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/keyboard_background"
+    android:keyBackground="@drawable/key_background"
+    android:keyTextColor="@color/key_text"
+    android:keyTextSize="18sp"
+    android:keyPreviewLayout="@layout/key_preview"
+    android:shadowRadius="0.0" />
