@@ -1,0 +1,38 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+    paths: ["veritype-ime/**", ".github/workflows/**"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # Provision Gradle 8.7 to match gradle-wrapper.properties (wrapper jar
+      # is not committed to this repo).
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.7"
+
+      - name: Accept SDK licenses
+        run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+
+      - name: Build debug APK
+        working-directory: veritype-ime
+        run: gradle assembleDebug --no-daemon --stacktrace
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: veritype-apk
+          path: veritype-ime/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 30
