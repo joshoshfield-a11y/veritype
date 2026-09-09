@@ -151,7 +151,7 @@ class VeriTypeIMEService : InputMethodService(), KeyboardView.OnKeyboardActionLi
 
             else -> {
                 var code = primaryCode
-                if (isShifted && !showingSymbols && code in 'a'.code..'z'.code) {
+                if (isShifted && activeLayout == LAYOUT_QWERTY && code in 'a'.code..'z'.code) {
                     code = Character.toUpperCase(code)
                 }
                 val text = code.toChar().toString()
