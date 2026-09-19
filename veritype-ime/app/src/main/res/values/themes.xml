@@ -8,5 +8,6 @@
         <item name="android:colorBackground">@color/veritype_background</item>
         <item name="colorSurface">@color/veritype_surface</item>
         <item name="android:statusBarColor">@color/veritype_primary_dark</item>
+        <item name="android:navigationBarColor">@color/keyboard_background</item>
     </style>
 </resources>

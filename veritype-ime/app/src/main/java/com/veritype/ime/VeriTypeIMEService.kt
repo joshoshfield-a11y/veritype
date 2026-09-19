@@ -6,9 +6,14 @@ import android.inputmethodservice.InputMethodService
 import android.inputmethodservice.Keyboard
 import android.inputmethodservice.KeyboardView
 import android.text.InputType
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.FrameLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.veritype.ime.data.AppDatabase
 import com.veritype.ime.data.LogEntry
 import com.veritype.ime.data.LogRepository
@@ -78,11 +83,35 @@ class VeriTypeIMEService : InputMethodService(), KeyboardView.OnKeyboardActionLi
     }
 
     override fun onCreateInputView(): View {
+        // Wrap the keyboard in a bottom-anchored container so the key rows can
+        // be lifted above the system navigation bar (gesture pill / 3-button
+        // nav). We pad the WRAPPER rather than the KeyboardView itself: the
+        // legacy KeyboardView measures its key rows against its own raw
+        // height, so wrapper padding is the reliable lever across API levels.
+        val container = FrameLayout(this)
         keyboardView = LayoutInflater.from(this)
             .inflate(R.layout.keyboard_view, null) as KeyboardView
         keyboardView.keyboard = qwertyKeyboard
         keyboardView.setOnKeyboardActionListener(this)
-        return keyboardView
+        container.addView(
+            keyboardView,
+            FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                Gravity.BOTTOM
+            )
+        )
+        // On API < 30 the IME window never extends behind the nav bar, so this
+        // inset is 0 there and the layout is unchanged. On gesture-nav /
+        // edge-to-edge devices it equals the nav bar height and keeps the
+        // bottom key row (space/enter) fully tappable.
+        ViewCompat.setOnApplyWindowInsetsListener(container) { v, insets ->
+            val bottom = insets.getInsets(WindowInsetsCompat.Type.systemBars()).bottom
+            v.setPadding(0, 0, 0, bottom)
+            insets
+        }
+        ViewCompat.requestApplyInsets(container)
+        return container
     }
 
     override fun onStartInput(attribute: EditorInfo?, restarting: Boolean) {
